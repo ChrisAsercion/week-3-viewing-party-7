@@ -33,4 +33,30 @@ RSpec.describe 'Landing Page' do
       expect(page).to have_content(user2.email)
     end     
   end 
+
+  describe 'emails instead of show' do
+    #Task 4
+    scenario 'the landing page only shows the emails of each of the users, not the link to their show page' do
+      user = User.create(name: "Johnny Joestar", email: "horserider@gmail.com", password: "test123")
+
+      user2 = User.create(name: "Gyro Zeppeli", email: "falloffyour@horse.com", password: "spin123")
+
+      visit root_path 
+
+      expect(page).to have_content(user.email)
+      expect(page).to have_content(user2.email)
+      
+    end
+  end
+
+  #task 5 story 3
+  describe 'dashboard error alert' do
+    scenario 'I click dashboard, but I am not logged in' do
+      user = User.create(name: "Johnny Joestar", email: "horserider@gmail.com", password: "test123")
+      visit root_path
+
+      visit user_path(user)
+      
+    end
+  end
 end
